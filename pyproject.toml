@@ -31,6 +31,15 @@ branch = true
 relative_files = true
 source = ["oidc_identity"]
 
+[tool.pyright]
+include = ["oidc_identity", "tests"]
+typeCheckingMode = "off"
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "tests.settings"
+# see https://pytest-django.readthedocs.io/en/latest/managing_python_path.html#managing-the-python-path-explicitly
+django_find_project = false
+
 [tool.setuptools.packages.find]
 include = ["oidc_identity*"]
 namespaces = false
