@@ -1,0 +1,15 @@
+prune .devcontainer
+prune .github
+prune .vscode
+prune tests/coverage
+
+exclude tests/*.sh
+exclude .flake8
+exclude .gitignore
+exclude .pre-commit-config.yaml
+exclude compose.yml
+exclude MANIFEST.in
+
+include LICENSE
+include README.md
+recursive-include *.html
