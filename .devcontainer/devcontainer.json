@@ -1,5 +1,5 @@
 {
-  "name": "cdt/django-oidc-identity",
+  "name": "cdt/django-cdt-identity",
   "dockerComposeFile": ["../compose.yml"],
   "service": "dev",
   "runServices": ["dev"],

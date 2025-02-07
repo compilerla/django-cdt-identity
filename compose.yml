@@ -1,12 +1,13 @@
-name: django-oidc-identity
+name: django-cdt-identity
 
 services:
   dev:
     build:
       context: .
       dockerfile: .devcontainer/Dockerfile
-    image: cdt/django-oidc-identity:dev
-    env_file: .env
+    image: cdt/django-cdt-identity:dev
+    environment:
+      DJANGO_SETTINGS_MODULE: tests.settings
     # https://code.visualstudio.com/docs/remote/create-dev-container#_use-docker-compose
     entrypoint: sleep infinity
     volumes:
