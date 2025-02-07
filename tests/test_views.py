@@ -1,29 +1,28 @@
 import re
 
+import pytest
 from django.http import HttpResponse
 
-from oidc_identity.routes import Routes
-from oidc_identity.session import Session
-from oidc_identity.views import _client_or_error_redirect, authorize, login, logout
-
-import pytest
+from cdt_identity.routes import Routes
+from cdt_identity.session import Session
+from cdt_identity.views import _client_or_error_redirect, authorize, login, logout
 
 
 @pytest.fixture
 def mock_session(mocker):
     session = mocker.Mock(spec=Session)
-    mocker.patch("oidc_identity.views.Session", return_value=session)
+    mocker.patch("cdt_identity.views.Session", return_value=session)
     return session
 
 
 @pytest.fixture
 def mock_oauth_create_client(mocker, mock_oauth_client):
-    return mocker.patch("oidc_identity.views.create_client", return_value=mock_oauth_client)
+    return mocker.patch("cdt_identity.views.create_client", return_value=mock_oauth_client)
 
 
 @pytest.fixture
 def mock_client_or_error_redirect(mocker, mock_oauth_client):
-    return mocker.patch("oidc_identity.views._client_or_error_redirect", return_value=mock_oauth_client)
+    return mocker.patch("cdt_identity.views._client_or_error_redirect", return_value=mock_oauth_client)
 
 
 @pytest.mark.django_db
@@ -67,7 +66,7 @@ def test_authorize_success(mocker, mock_oauth_client, mock_request, mock_session
     mock_session.oidc_expected_claims = "claim1 claim2"
     mock_session.oidc_eligibility_claims = "claim1"
     mock_session.oidc_claims_authorize_success = "/success"
-    mock_redirect = mocker.patch("oidc_identity.views.redirect")
+    mock_redirect = mocker.patch("cdt_identity.views.redirect")
 
     authorize(mock_request)
 
@@ -113,7 +112,7 @@ def test_authorize_no_expected_claims(mocker, mock_oauth_client, mock_request, m
     mock_session.oidc_expected_claims = ""
     mock_session.oidc_eligibility_claims = "claim1"
     mock_session.oidc_claims_authorize_fail = "/fail"
-    mock_redirect = mocker.patch("oidc_identity.views.redirect")
+    mock_redirect = mocker.patch("cdt_identity.views.redirect")
 
     authorize(mock_request)
 
@@ -130,7 +129,7 @@ def test_authorize_no_token_claims(mocker, mock_oauth_client, mock_request, mock
     mock_session.oidc_expected_claims = "claim1 claim2"
     mock_session.oidc_eligibility_claims = "claim1"
     mock_session.oidc_claims_authorize_fail = "/fail"
-    mock_redirect = mocker.patch("oidc_identity.views.redirect")
+    mock_redirect = mocker.patch("cdt_identity.views.redirect")
 
     authorize(mock_request)
 
@@ -147,7 +146,7 @@ def test_authorize_token_error_claims(mocker, mock_oauth_client, mock_request, m
     mock_session.oidc_expected_claims = "claim1 claim2"
     mock_session.oidc_eligibility_claims = "claim1"
     mock_session.oidc_claims_authorize_fail = "/fail"
-    mock_redirect = mocker.patch("oidc_identity.views.redirect")
+    mock_redirect = mocker.patch("cdt_identity.views.redirect")
 
     authorize(mock_request)
 
@@ -158,7 +157,7 @@ def test_authorize_token_error_claims(mocker, mock_oauth_client, mock_request, m
 @pytest.mark.usefixtures("mock_client_or_error_redirect")
 def test_login_success(mocker, mock_oauth_client, mock_request):
     mock_oauth_client.authorize_redirect.return_value = HttpResponse(status=200)
-    mock_reverse = mocker.patch("oidc_identity.views.reverse", return_value="authorize")
+    mock_reverse = mocker.patch("cdt_identity.views.reverse", return_value="authorize")
 
     response = login(mock_request)
 
@@ -214,9 +213,9 @@ def test_login_authorize_redirect_error_response(mock_oauth_client, mock_request
 @pytest.mark.django_db
 @pytest.mark.usefixtures("mock_client_or_error_redirect")
 def test_logout(mocker, mock_request, mock_session):
-    mock_redirects = mocker.patch("oidc_identity.views.redirects")
+    mock_redirects = mocker.patch("cdt_identity.views.redirects")
     mock_redirects.deauthorize_redirect.return_value = HttpResponse(status=200)
-    mock_reverse = mocker.patch("oidc_identity.views.reverse", return_value="deauthorize")
+    mock_reverse = mocker.patch("cdt_identity.views.reverse", return_value="deauthorize")
 
     response = logout(mock_request)
 
@@ -234,4 +233,5 @@ def test_logout_no_client(mocker, mock_client_or_error_redirect, mock_request):
 
     response = logout(mock_request)
 
+    assert response == error_redirect
     assert response == error_redirect

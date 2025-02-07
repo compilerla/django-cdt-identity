@@ -1,6 +1,6 @@
 import pytest
 
-from oidc_identity.claims import Claims
+from cdt_identity.claims import Claims
 
 
 @pytest.mark.parametrize(

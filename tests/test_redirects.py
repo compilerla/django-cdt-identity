@@ -1,6 +1,6 @@
 import pytest
 
-from oidc_identity.redirects import deauthorize_redirect, generate_redirect_uri
+from cdt_identity.redirects import deauthorize_redirect, generate_redirect_uri
 
 
 @pytest.mark.django_db

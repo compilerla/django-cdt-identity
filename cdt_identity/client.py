@@ -6,7 +6,7 @@ import logging
 
 from authlib.integrations.django_client import OAuth
 
-from oidc_identity.models import ClientConfig
+from cdt_identity.models import ClientConfig
 
 logger = logging.getLogger(__name__)
 

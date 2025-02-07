@@ -1,7 +1,7 @@
 [project]
-name = "django-oidc-identity"
+name = "django-cdt-identity"
 dynamic = ["version"]
-description = "Django OpenID Connect Identity"
+description = "Django client for identity proofing and claims verification with the California Department of Technology's Identity Gateway."
 readme = "README.md"
 license = { file = "LICENSE" }
 classifiers = ["Programming Language :: Python :: 3 :: Only"]
@@ -14,8 +14,8 @@ dev = ["black", "djlint", "flake8", "pre-commit", "setuptools_scm>=8"]
 test = ["coverage", "pytest", "pytest-django", "pytest-mock", "pytest-socket"]
 
 [project.urls]
-Code = "https://github.com/compilerla/django-oidc-identity"
-Issues = "https://github.com/compilerla/django-oidc-identity/issues"
+Code = "https://github.com/compilerla/django-cdt-identity"
+Issues = "https://github.com/compilerla/django-cdt-identity/issues"
 
 [build-system]
 requires = ["setuptools>=75", "setuptools_scm>=8"]
@@ -29,10 +29,10 @@ include = '\.pyi?$'
 [tool.coverage.run]
 branch = true
 relative_files = true
-source = ["oidc_identity"]
+source = ["cdt_identity"]
 
 [tool.pyright]
-include = ["oidc_identity", "tests"]
+include = ["cdt_identity", "tests"]
 typeCheckingMode = "off"
 
 [tool.pytest.ini_options]
@@ -41,7 +41,7 @@ DJANGO_SETTINGS_MODULE = "tests.settings"
 django_find_project = false
 
 [tool.setuptools.packages.find]
-include = ["oidc_identity*"]
+include = ["cdt_identity*"]
 namespaces = false
 
 [tool.setuptools_scm]

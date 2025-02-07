@@ -1,4 +1,4 @@
 def test_version():
-    from oidc_identity import VERSION
+    from cdt_identity import VERSION
 
     assert VERSION != ""

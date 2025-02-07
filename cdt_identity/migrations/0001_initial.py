@@ -2,8 +2,8 @@
 
 from django.db import migrations, models
 
-import oidc_identity.models
-import oidc_identity.secrets
+import cdt_identity.models
+import cdt_identity.secrets
 
 
 class Migration(migrations.Migration):
@@ -20,10 +20,10 @@ class Migration(migrations.Migration):
                 ("client_name", models.SlugField(help_text="The name of this OIDC client", unique=True)),
                 (
                     "client_id_secret_name",
-                    oidc_identity.models.SecretNameField(
+                    cdt_identity.models.SecretNameField(
                         help_text="The name of the secret containing the client ID for this OIDC client",
                         max_length=127,
-                        validators=[oidc_identity.secrets.SecretNameValidator()],
+                        validators=[cdt_identity.secrets.SecretNameValidator()],
                     ),
                 ),
                 (

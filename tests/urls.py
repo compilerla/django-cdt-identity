@@ -1,4 +1,3 @@
 from django.urls import include, path
 
-
-urlpatterns = [path("", include("oidc_identity.urls"))]
+urlpatterns = [path("", include("cdt_identity.urls"))]

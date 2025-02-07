@@ -1,9 +1,8 @@
 import pytest
-
 from django.http import HttpRequest
 
-from oidc_identity.session import Session
-from oidc_identity.models import ClientConfig
+from cdt_identity.models import ClientConfig
+from cdt_identity.session import Session
 
 
 @pytest.fixture

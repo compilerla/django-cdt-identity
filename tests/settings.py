@@ -24,7 +24,7 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.messages",
     "django.contrib.sessions",
-    "oidc_identity",
+    "cdt_identity",
 ]
 
 MIDDLEWARE = [

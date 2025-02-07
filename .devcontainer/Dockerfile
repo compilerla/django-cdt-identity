@@ -27,7 +27,7 @@ ENV PATH="$PATH:/home/$USER/.local/bin" \
     PYTHONUSERBASE="/home/$USER/.local"
 
 COPY .git .git
-COPY oidc_identity oidc_identity
+COPY cdt_identity cdt_identity
 COPY pyproject.toml pyproject.toml
 
 # install devcontainer requirements

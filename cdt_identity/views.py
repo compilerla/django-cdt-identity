@@ -6,7 +6,8 @@ from django.urls import reverse
 
 from . import redirects
 from .claims import Claims
-from .client import create_client, oauth as registry
+from .client import create_client
+from .client import oauth as registry
 from .routes import Routes
 from .session import Session
 
@@ -14,7 +15,7 @@ logger = logging.getLogger(__name__)
 
 
 def _client_or_error_redirect(request: HttpRequest):
-    """Calls `oidc_identity.client.create_client()`.
+    """Calls `cdt_identity.client.create_client()`.
 
     If a client is created successfully, return it; otherwise, raise an appropriate Exception.
     """
@@ -150,4 +151,5 @@ def logout(request: HttpRequest):
 
     # send the user through the end_session_endpoint, redirecting back to
     # the post_logout route
+    return redirects.deauthorize_redirect(request, oauth_client, token, redirect_uri)
     return redirects.deauthorize_redirect(request, oauth_client, token, redirect_uri)

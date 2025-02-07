@@ -1,7 +1,7 @@
 import pytest
 
-from oidc_identity.models import ClientConfig
-from oidc_identity.client import _client_kwargs, _server_metadata_url, _authorize_params, create_client
+from cdt_identity.client import _authorize_params, _client_kwargs, _server_metadata_url, create_client
+from cdt_identity.models import ClientConfig
 
 
 def test_client_kwargs():
@@ -57,9 +57,9 @@ def test_create_client_not_registered(mocker, mock_oauth_registry):
     mock_config.client_name = "client_name_1"
     mock_config.client_id = "client_id_1"
 
-    mocker.patch("oidc_identity.client._client_kwargs", return_value={"client": "kwargs"})
-    mocker.patch("oidc_identity.client._server_metadata_url", return_value="https://metadata.url")
-    mocker.patch("oidc_identity.client._authorize_params", return_value={"scheme": "test_scheme"})
+    mocker.patch("cdt_identity.client._client_kwargs", return_value={"client": "kwargs"})
+    mocker.patch("cdt_identity.client._server_metadata_url", return_value="https://metadata.url")
+    mocker.patch("cdt_identity.client._authorize_params", return_value={"scheme": "test_scheme"})
 
     mock_oauth_registry.create_client.return_value = None
 

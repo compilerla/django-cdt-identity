@@ -1,4 +1,4 @@
-from oidc_identity import urls, views
+from cdt_identity import urls, views
 
 
 def test_endpoints_view():
