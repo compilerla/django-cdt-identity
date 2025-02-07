@@ -34,8 +34,8 @@ def test_client_name_unique(config_data):
 
 @pytest.mark.django_db
 def test_client_id_property(config_data, mocker):
-    mock_get_secret = mocker.patch("cdt_identity.models.get_secret_by_name")
-    mock_get_secret.return_value = "client-123"
+    mock_get_secret = mocker.patch("cdt_identity.models.KeyVaultField")
+    mock_get_secret.secret_value.return_value = "client-123"
 
     client = ClientConfig.objects.create(**config_data)
     assert client.client_id == "client-123"
