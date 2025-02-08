@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
             name="ClientConfig",
             fields=[
                 ("id", models.AutoField(primary_key=True, serialize=False)),
-                ("client_name", models.SlugField(help_text="The name of this OIDC client", unique=True)),
+                ("client_name", models.SlugField(help_text="The name of this Identity Gateway client", unique=True)),
                 (
                     "client_id_secret_name",
                     cdt_identity.models.SecretNameField(
@@ -29,16 +29,19 @@ class Migration(migrations.Migration):
                 (
                     "authority",
                     models.CharField(
-                        help_text="The fully qualified HTTPS domain name for an OIDC authority server", max_length=100
+                        help_text="The fully qualified HTTPS domain name for an Identity Gateway authority server",
+                        max_length=100,
                     ),
                 ),
                 (
                     "scheme",
-                    models.CharField(help_text="The authentication scheme for the authority server", max_length=100),
+                    models.CharField(
+                        help_text="The authentication scheme for the Identity Gateway authority server", max_length=100
+                    ),
                 ),
             ],
             options={
-                "verbose_name": "OIDC Client",
+                "verbose_name": "Identity Gateway Client",
             },
         ),
     ]
