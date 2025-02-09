@@ -9,7 +9,7 @@ from cdt_identity.models import ClientConfig
 def config_data():
     return {
         "client_name": "test-client",
-        "client_id_secret_name": "test-secret-name",
+        "client_id": "test-client-id",
         "authority": "https://auth.example.com",
         "scheme": "bearer",
     }
@@ -20,6 +20,7 @@ def test_create_client_config(config_data):
     client = ClientConfig.objects.create(**config_data)
 
     assert client.client_name == config_data["client_name"]
+    assert client.client_id == config_data["client_id"]
     assert client.authority == config_data["authority"]
     assert client.scheme == config_data["scheme"]
 
@@ -30,16 +31,6 @@ def test_client_name_unique(config_data):
 
     with pytest.raises(IntegrityError):
         ClientConfig.objects.create(**config_data)
-
-
-@pytest.mark.django_db
-def test_client_id_property(config_data, mocker):
-    mock_get_secret = mocker.patch("cdt_identity.models.get_secret_by_name")
-    mock_get_secret.return_value = "client-123"
-
-    client = ClientConfig.objects.create(**config_data)
-    assert client.client_id == "client-123"
-    mock_get_secret.assert_called_once_with(config_data["client_id_secret_name"])
 
 
 @pytest.mark.django_db

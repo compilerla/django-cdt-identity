@@ -3,7 +3,6 @@
 from django.db import migrations, models
 
 import cdt_identity.models
-import cdt_identity.secrets
 
 
 class Migration(migrations.Migration):
@@ -19,11 +18,10 @@ class Migration(migrations.Migration):
                 ("id", models.AutoField(primary_key=True, serialize=False)),
                 ("client_name", models.SlugField(help_text="The name of this Identity Gateway client", unique=True)),
                 (
-                    "client_id_secret_name",
-                    cdt_identity.models.SecretNameField(
-                        help_text="The name of the secret containing the client ID for this OIDC client",
-                        max_length=127,
-                        validators=[cdt_identity.secrets.SecretNameValidator()],
+                    "client_id",
+                    models.CharField(
+                        help_text="The client ID for this Identity Gateway client",
+                        max_length=100,
                     ),
                 ),
                 (
