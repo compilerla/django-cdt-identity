@@ -1,7 +1,7 @@
 import pytest
 from django.http import HttpRequest
 
-from cdt_identity.models import ClientConfig
+from cdt_identity.models import IdentityGatewayConfig
 from cdt_identity.session import Session
 
 
@@ -14,7 +14,7 @@ def mock_request(mocker):
 
 @pytest.fixture
 def mock_config(mocker):
-    return mocker.MagicMock(spec=ClientConfig)
+    return mocker.MagicMock(spec=IdentityGatewayConfig)
 
 
 @pytest.mark.django_db
@@ -60,7 +60,7 @@ def test_session_config(mocker, mock_config, mock_request):
     session.oidc_config = mock_config
     assert mock_request.session["oidc_config"] == "123"
 
-    mock_filter = mocker.patch.object(ClientConfig.objects, "filter")
+    mock_filter = mocker.patch.object(IdentityGatewayConfig.objects, "filter")
     mock_filter.return_value.first.return_value = mock_config
 
     assert session.oidc_config == mock_config

@@ -1,7 +1,7 @@
 import pytest
 
 from cdt_identity.client import _authorize_params, _client_kwargs, _server_metadata_url, create_client
-from cdt_identity.models import ClientConfig
+from cdt_identity.models import IdentityGatewayConfig
 
 
 def test_client_kwargs():
@@ -41,7 +41,7 @@ def test_authorize_params(scheme, expected):
 
 @pytest.mark.django_db
 def test_create_client_registered(mocker, mock_oauth_registry):
-    mock_config = mocker.Mock(spec=ClientConfig)
+    mock_config = mocker.Mock(spec=IdentityGatewayConfig)
     mock_config.client_name = "client_name_1"
     mock_config.client_id = "client_id_1"
 
@@ -53,7 +53,7 @@ def test_create_client_registered(mocker, mock_oauth_registry):
 
 @pytest.mark.django_db
 def test_create_client_not_registered(mocker, mock_oauth_registry):
-    mock_config = mocker.Mock(spec=ClientConfig)
+    mock_config = mocker.Mock(spec=IdentityGatewayConfig)
     mock_config.client_name = "client_name_1"
     mock_config.client_id = "client_id_1"
 

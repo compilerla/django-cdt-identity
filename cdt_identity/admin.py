@@ -1,8 +1,8 @@
 from django.contrib import admin
 
-from . import models
+from .models import IdentityGatewayConfig
 
 
-@admin.register(models.ClientConfig)
-class ClientConfigAdmin(admin.ModelAdmin):
+@admin.register(IdentityGatewayConfig)
+class IdentityGatewayConfigAdmin(admin.ModelAdmin):
     list_display = ("client_name", "authority", "scheme")

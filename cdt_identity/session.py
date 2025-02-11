@@ -1,6 +1,6 @@
 from django.http import HttpRequest
 
-from .models import ClientConfig
+from .models import IdentityGatewayConfig
 
 
 class Session:
@@ -87,12 +87,12 @@ class Session:
         self.session["oidc_verified_claims"] = value
 
     @property
-    def oidc_config(self) -> ClientConfig:
+    def oidc_config(self) -> IdentityGatewayConfig:
         val = self.session.get("oidc_config")
-        return ClientConfig.objects.filter(id=val).first()
+        return IdentityGatewayConfig.objects.filter(id=val).first()
 
     @oidc_config.setter
-    def oidc_config(self, value: ClientConfig) -> None:
+    def oidc_config(self, value: IdentityGatewayConfig) -> None:
         self.session["oidc_config"] = value.id
 
     @property
