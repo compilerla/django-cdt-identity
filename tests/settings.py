@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.sessions",
     "cdt_identity",
+    "tests.app",
 ]
 
 MIDDLEWARE = [
