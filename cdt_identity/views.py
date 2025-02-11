@@ -5,7 +5,7 @@ from django.shortcuts import redirect
 from django.urls import reverse
 
 from . import redirects
-from .claims import Claims
+from .claims import ClaimsParser
 from .client import create_client
 from .client import oauth as registry
 from .routes import Routes
@@ -75,7 +75,7 @@ def authorize(request: HttpRequest):
     expected_claims = [claim for claim in session.oidc_expected_claims.split(" ") if claim]
     if expected_claims:
         userinfo = token.get("userinfo", {})
-        processed_claims = Claims(userinfo, expected_claims)
+        processed_claims = ClaimsParser.parse(userinfo, expected_claims)
     # if we found the eligibility claim
     eligibility_claim = session.oidc_eligibility_claims
     if eligibility_claim and eligibility_claim in processed_claims:
