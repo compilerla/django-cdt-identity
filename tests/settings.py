@@ -4,6 +4,8 @@ Minimal Django settings necessary for generating migrations and running tests.
 
 import os
 
+DEBUG = True
+
 SECRET_KEY = "secret key"
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -24,12 +26,17 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.messages",
     "django.contrib.sessions",
+    "django.contrib.staticfiles",
     "cdt_identity",
     "tests.app",
 ]
 
 MIDDLEWARE = [
+    "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
 ]
@@ -48,4 +55,8 @@ TEMPLATES = [
     }
 ]
 
+STATIC_URL = "/static/"
+
 ROOT_URLCONF = "tests.urls"
+
+USE_TZ = True
