@@ -4,12 +4,13 @@ from django.views.generic import TemplateView
 from . import views
 from .routes import Routes
 
-app_name = "oidc"
+app_name = "cdt"
 
 endpoints_template = [
     Routes.cancel,
     Routes.post_logout,
-    Routes.success,
+    Routes.verify_fail,
+    Routes.verify_success,
 ]
 endpoints_view = [
     Routes.authorize,
