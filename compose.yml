@@ -8,6 +8,9 @@ services:
     image: cdt/django-cdt-identity:dev
     environment:
       DJANGO_SETTINGS_MODULE: tests.settings
+      DJANGO_SUPERUSER_USERNAME: superuser
+      DJANGO_SUPERUSER_EMAIL: superuser@example.com
+      DJANGO_SUPERUSER_PASSWORD: superuser12345!
     # https://code.visualstudio.com/docs/remote/create-dev-container#_use-docker-compose
     entrypoint: sleep infinity
     volumes:
