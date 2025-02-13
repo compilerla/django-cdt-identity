@@ -13,5 +13,7 @@ services:
       DJANGO_SUPERUSER_PASSWORD: superuser12345!
     # https://code.visualstudio.com/docs/remote/create-dev-container#_use-docker-compose
     entrypoint: sleep infinity
+    ports:
+      - "8000"
     volumes:
       - ./:/home/cdt/src
